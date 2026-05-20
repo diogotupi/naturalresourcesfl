@@ -16,19 +16,27 @@ Open http://localhost:8080
 
 ## Deploy
 
-Upload these files to your web host (or replace your current site files):
+### GitHub Pages (recommended)
 
-- `index.html`
-- `css/styles.css`
-- `js/main.js`
+1. Log in to GitHub CLI (one time):
 
-### Options
+   ```powershell
+   gh auth login
+   ```
 
-| Platform | Steps |
-|----------|--------|
-| **Netlify / Vercel** | Drag this folder into the dashboard, or connect your Git repo |
-| **cPanel / FTP** | Upload to `public_html` |
-| **Cloudflare Pages** | Connect repo, build command: none, output: `.` |
+2. Create the repo, push, and enable Pages:
+
+   ```powershell
+   .\scripts\deploy-github.ps1
+   ```
+
+3. After the [Deploy to GitHub Pages](.github/workflows/deploy-pages.yml) workflow finishes, your site is live at:
+
+   `https://YOUR_USERNAME.github.io/naturalresourcesfl/`
+
+### Other hosts
+
+Upload `index.html`, `css/`, and `js/` to Netlify, Vercel, cPanel, or Cloudflare Pages.
 
 ## Forms
 
