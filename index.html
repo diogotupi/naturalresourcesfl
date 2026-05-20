@@ -483,11 +483,23 @@
             <label for="cMessage">Message</label>
             <textarea id="cMessage" name="message" rows="4" required></textarea>
           </div>
-          <fieldset class="form-group">
-            <legend>Are you a current customer?</legend>
-            <div class="radio-group">
-              <label><input type="radio" name="customer" value="yes" /> Yes</label>
-              <label><input type="radio" name="customer" value="no" checked /> No</label>
+          <fieldset class="form-group form-group--customer">
+            <legend id="customerLegend">Are you a current customer?</legend>
+            <div class="customer-choice" role="radiogroup" aria-labelledby="customerLegend">
+              <label class="customer-choice__option">
+                <input type="radio" name="customer" value="yes" />
+                <span class="customer-choice__card">
+                  <span class="customer-choice__title">Yes</span>
+                  <span class="customer-choice__hint">I'm already a customer</span>
+                </span>
+              </label>
+              <label class="customer-choice__option">
+                <input type="radio" name="customer" value="no" checked />
+                <span class="customer-choice__card">
+                  <span class="customer-choice__title">No</span>
+                  <span class="customer-choice__hint">First time contacting you</span>
+                </span>
+              </label>
             </div>
           </fieldset>
           <button type="submit" class="btn btn--primary btn--full">Send Message</button>
