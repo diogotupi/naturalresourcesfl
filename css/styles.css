@@ -470,15 +470,20 @@ h3 {
   color: var(--color-text-muted);
 }
 
+.quote-form .form-step.active {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .quote-form label {
   display: block;
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--color-text-muted);
-  margin-bottom: 0.375rem;
-  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  margin-top: 0;
 }
-.quote-form label:first-child { margin-top: 0; }
 
 .quote-form select,
 .quote-form input,
@@ -505,12 +510,15 @@ h3 {
 }
 
 .form-step { display: none; }
-.form-step.active { display: block; }
 
 .form-step__actions {
   display: flex;
   gap: 0.75rem;
-  margin-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.quote-form .form-step.active > .btn[data-next] {
+  margin-top: 0.5rem;
 }
 .form-step__actions .btn--primary { flex: 1; }
 
