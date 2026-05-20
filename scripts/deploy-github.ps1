@@ -26,10 +26,15 @@ if (-not (git rev-parse --git-dir 2>$null)) {
     git commit -m "Initial commit: Natural Resources Pest Control website"
 }
 
-$remoteUrl = gh repo view "$owner/$RepoName" --json url -q .url 2>$null
-if ($LASTEXITCODE -ne 0) {
+$prevEap = $ErrorActionPreference
+$ErrorActionPreference = "Continue"
+gh repo view "$owner/$RepoName" --json url -q .url 2>$null | Out-Null
+$repoMissing = ($LASTEXITCODE -ne 0)
+$ErrorActionPreference = $prevEap
+
+if ($repoMissing) {
     Write-Host "Creating public repo $owner/$RepoName ..." -ForegroundColor Cyan
-    gh repo create $RepoName --public --description "Natural Resources Pest Control — Miami, FL" --source=. --remote=origin --push
+    gh repo create $RepoName --public --description "Natural Resources Pest Control - Miami, FL" --source=. --remote=origin --push
 } else {
     Write-Host "Repo exists. Pushing to origin ..."
     git push -u origin main
@@ -41,7 +46,9 @@ if ($LASTEXITCODE -ne 0) {
     gh api "repos/$owner/$RepoName/pages" -X POST -f build_type=workflow
 }
 
+$pagesUrl = "https://$owner.github.io/$RepoName/"
+$actionsUrl = "https://github.com/$owner/$RepoName/actions"
 Write-Host ""
 Write-Host "Done. Pages deploy runs on push to main." -ForegroundColor Green
-Write-Host "Site URL (after workflow completes): https://$owner.github.io/$RepoName/" -ForegroundColor Green
-Write-Host "Check Actions: https://github.com/$owner/$RepoName/actions" -ForegroundColor Green
+Write-Host "Site URL (after workflow completes): $pagesUrl" -ForegroundColor Green
+Write-Host "Check Actions: $actionsUrl" -ForegroundColor Green
